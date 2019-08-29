@@ -1,14 +1,27 @@
-console.log(apiKey)
 $(document).ready(function() {
-    var firebaseConfig = {
-        apiKey: apiKey,
-        authDomain: "trainscheduler-64ee7.firebaseapp.com",
-        databaseURL: "https://trainscheduler-64ee7.firebaseio.com",
-        projectId: "trainscheduler-64ee7",
-        storageBucket: "",
-        messagingSenderId: "786925156466",
-        appId: "1:786925156466:web:e2f84db3df46fc3d"
-      };
-    
       firebase.initializeApp(firebaseConfig);
+      
+      var trCount = 0;
+
+      $("button").on("click", function(event) {
+        event.preventDefault();
+
+        // gets value of info from Form 
+        // console.log it
+        var trainName = $("#trainName").val().trim();
+        var formDestination = $("#formDestination").val().trim();
+        var trainTime = $("#trainTime").val().trim();
+        var formFrequency = $("#formFrequency").val().trim();
+        console.log(trainName);
+        console.log(formDestination);
+        console.log(trainTime);
+        console.log(formFrequency);
+
+        var newTR = $("<tr class='" + trCount + "'>")
+        $("tbody").append($(newTR));
+        for(var i = 0; i < 5; i++) {
+            newTR.append($("<td>"))
+        };
+
+      })
 }) 
