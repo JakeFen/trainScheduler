@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Anytime is Train Time</h1>
+      <p>Choo Choo. Chee Chee</p>
+    </header>
+
+    <main>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Train Name</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Frequency (min)</th>
+            <th scope="col">Next Arrival</th>
+            <th scope="col">Minutes Away</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Jake Express</th>
+            <td>JakeTown</td>
+            <td>25</td>
+            <td>05:35 PM</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+      <form>
+        <div class="form-group">
+          <label for="trainName">Train Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="trainName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formDestination">Destination</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formDestination"
+          />
+        </div>
+        <div class="form-group">
+          <label for="trainTime">First Train Time (HH:mm - military time)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="trainTime"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formFrequency">Frequency (min)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formFrequency"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </main>
+
+    <footer></footer>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js"></script>
+    <script src="assets/scripts.js"></script>
+  </body>
+</html>
