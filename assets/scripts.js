@@ -1,64 +1,91 @@
 $(document).ready(function() {
-      firebase.initializeApp(firebaseConfig);
-      
-      var database = firebase.database();
+  firebase.initializeApp(firebaseConfig);
 
-      var trCount = 0;
+  var database = firebase.database();
 
-      $("button").on("click", function(event) {
-        event.preventDefault();
+  $("button").on("click", function(event) {
+    event.preventDefault();
 
-        // gets value of info from Form 
-        // console.log it
-        var trainName = $("#trainName").val().trim();
-        var formDestination = $("#formDestination").val().trim();
-        var trainTime = $("#trainTime").val().trim();
-        var formFrequency = $("#formFrequency").val().trim();
+    // gets value of info from Form
+    // console.log it
+    var trainName = $("#trainName")
+      .val()
+      .trim();
+    var formDestination = $("#formDestination")
+      .val()
+      .trim();
+    var trainTime = $("#trainTime")
+      .val()
+      .trim();
+    var formFrequency = $("#formFrequency")
+      .val()
+      .trim();
 
-        var newTrain = {
-            train: trainName,
-            destination: formDestination,
-            time: trainTime,
-            frequency: formFrequency
-        }
+    var newTrain = {
+      train: trainName,
+      destination: formDestination,
+      time: trainTime,
+      frequency: formFrequency
+    };
 
-        database.ref().push(newTrain);
-        
-        console.log(newTrain.train);
-        console.log(newTrain.destination);
-        console.log(newTrain.time);
-        console.log(newTrain.frequency);
+    database.ref().push(newTrain);
 
-        $("#trainName").val("");
-        $("#formDestination").val("");
-        $("#trainTime").val("");
-        $("#formFrequency").val("");
-      })
+    console.log(newTrain.train);
+    console.log(newTrain.destination);
+    console.log(newTrain.time);
+    console.log(newTrain.frequency);
 
-      database.ref().on("child_added", function(childSnapshot){
-        console.log(childSnapshot);
+    $("#trainName").val("");
+    $("#formDestination").val("");
+    $("#trainTime").val("");
+    $("#formFrequency").val("");
+  });
 
-        var trainName = childSnapshot.val().train;
-        var formDestination = childSnapshot.val().destination;
-        var trainTime = childSnapshot.val().time;
-        var formFrequency = childSnapshot.val().frequency;
+  database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot);
 
-        console.log(trainName)
-        console.log(formDestination)
-        console.log(trainTime)
-        console.log(formFrequency)
+    var trainName = childSnapshot.val().train;
+    var formDestination = childSnapshot.val().destination;
+    var trainTime = childSnapshot.val().time;
+    var formFrequency = childSnapshot.val().frequency;
 
-        // var currentTime = ;
-        // var minAway = ;
+    console.log(trainName);
+    console.log(formDestination);
+    console.log(trainTime);
+    console.log(formFrequency);
 
-        var newRow = $("<tr>").append(
-            $("<td>").text(trainName),
-            $("<td>").text(formDestination),
-            $("<td>").text(formFrequency),
-            $("<td>").text(""),
-            $("<td>").text("")
-        );
+    // First Time
+    var firstTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
 
-        $("tbody").append(newRow);
-      })
-}) 
+    // Current Time
+    var currentTime = moment();
+    console.log(moment(currentTime).format("hh:mm"));
+
+    // Diffrent Between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log(diffTime);
+
+    // Time remaining
+    var tRemainder = diffTime % formFrequency;
+    console.log(tRemainder);
+
+    // Minutes until train
+    var tTillTrain = formFrequency - tRemainder;
+    console.log(tTillTrain);
+
+    // next Train
+    var nextTrain = moment().add(tTillTrain, "minutes");
+    console.log(moment(nextTrain).format("hh:mm"));
+
+    var newRow = $("<tr>").append(
+      $("<td>").text(trainName),
+      $("<td>").text(formDestination),
+      $("<td>").text(formFrequency),
+      $("<td>").text(moment(nextTrain).format("hh:mm A")),
+      $("<td>").text(tTillTrain)
+    );
+
+    $("tbody").append(newRow);
+  });
+});

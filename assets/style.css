@@ -1,0 +1,21 @@
+.header {
+    background: #873313;
+}
+
+caption {
+    caption-side: top;
+}
+
+.content-header {
+    font-size: 18px;
+    background:#1c65ad;
+    margin: 0;
+}
+
+table, form {
+    border: solid #1c65ad 1px;
+}
+
+label {
+    margin: 0;
+}
